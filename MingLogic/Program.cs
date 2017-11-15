@@ -4,12 +4,7 @@ using System.Linq;
 
 namespace MingLogic
 {
-    abstract class Prop
-    {
-        public abstract void Run(Circuit circuit, int time);
-    }
-
-    class AndProp : Prop
+    class AndProp : SignalChangedHandler
     {
         int a;
         int b;
@@ -28,7 +23,7 @@ namespace MingLogic
         }
     }
 
-    class ProbeProp : Prop
+    class ProbeProp : SignalChangedHandler
     {
         private int i;
 
@@ -87,7 +82,7 @@ namespace MingLogic
 
     class Circuit
     {
-        private List<List<Prop>> props = new List<List<Prop>>();
+        private List<List<SignalChangedHandler>> props = new List<List<SignalChangedHandler>>();
         private List<int> clocks = new List<int>();
 
         private bool[] signals;
@@ -95,7 +90,7 @@ namespace MingLogic
 
         internal int GetSignalNumber()
         {
-            props.Add(new List<Prop>());
+            props.Add(new List<SignalChangedHandler>());
             return props.Count - 1;
         }
 
