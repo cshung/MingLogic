@@ -42,9 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ScheduledEvents\AndScheduledEvent.cs" />
+    <Compile Include="ScheduledEvents\ScheduledEvent.cs" />
+    <Compile Include="SignalChangedHandlers\AndGateInputSignalChangedHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SignalChangedHandler.cs" />
+    <Compile Include="SignalChangedHandlers\ProbeInputSignalChangedHandler.cs" />
+    <Compile Include="SignalChangedHandlers\SignalChangedHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
