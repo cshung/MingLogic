@@ -6,6 +6,7 @@
     public interface IComponent
     {
         ISet<string> Ports { get; }
-        void Build(Dictionary<String, int> portMapping, Circuit circuit);
+
+        void Build(Dictionary<string, int> portMapping, Circuit circuit);
     }
 }

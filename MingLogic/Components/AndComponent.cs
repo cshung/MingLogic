@@ -7,7 +7,7 @@
     {
         public AndComponent()
         {
-            this.Ports = new HashSet<String> { "a", "b", "out" };
+            this.Ports = new HashSet<string> { "a", "b", "out" };
         }
 
         public ISet<string> Ports

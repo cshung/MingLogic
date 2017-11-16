@@ -16,7 +16,7 @@
 
         public override void Process(Circuit circuit)
         {
-            circuit.And(a, b, o, this.Time);
+            circuit.And(this.a, this.b, this.o, this.Time);
         }
     }
 }

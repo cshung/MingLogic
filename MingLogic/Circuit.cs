@@ -14,14 +14,14 @@
 
         public int GetSignalNumber()
         {
-            signalChangedHandlers.Add(new List<SignalChangedHandler>());
-            return signalChangedHandlers.Count - 1;
+            this.signalChangedHandlers.Add(new List<SignalChangedHandler>());
+            return this.signalChangedHandlers.Count - 1;
         }
 
         public void RegisterAndGate(int a, int b, int o)
         {
-            signalChangedHandlers[a].Add(new AndGateInputSignalChangedHandler(a, b, o));
-            signalChangedHandlers[b].Add(new AndGateInputSignalChangedHandler(a, b, o));
+            this.signalChangedHandlers[a].Add(new AndGateInputSignalChangedHandler(a, b, o));
+            this.signalChangedHandlers[b].Add(new AndGateInputSignalChangedHandler(a, b, o));
         }
 
         public void RegisterClock(int o)
@@ -40,12 +40,13 @@
             this.eventQueue = new List<ScheduledEvent>();
             foreach (var clock in this.clocks)
             {
-                eventQueue.Add(new TickScheduledEvent(0, clock));
+                this.eventQueue.Add(new TickScheduledEvent(0, clock));
             }
+
             for (int i = 0; i < 100; i++)
             {
-                ScheduledEvent e = eventQueue[0];
-                eventQueue.RemoveAt(0);
+                ScheduledEvent e = this.eventQueue[0];
+                this.eventQueue.RemoveAt(0);
                 e.Process(this);
             }
         }
@@ -57,6 +58,7 @@
             {
                 prop.Run(this, time);
             }
+
             this.eventQueue.Add(new TickScheduledEvent(signalIndex, time + 10));
             this.eventQueue = this.eventQueue.OrderBy(e => e.Time).ToList();
         }
@@ -78,7 +80,7 @@
 
         public void ProbeProp(int i, int time)
         {
-            Console.WriteLine("Signal " + i + " at time " + time + " is " + signals[i]);
+            Console.WriteLine("Signal " + i + " at time " + time + " is " + this.signals[i]);
         }
     }
 }

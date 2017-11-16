@@ -7,7 +7,7 @@
     {
         public Probe()
         {
-            this.Ports = new HashSet<String> { "in" };
+            this.Ports = new HashSet<string> { "in" };
         }
 
         public ISet<string> Ports

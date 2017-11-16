@@ -12,7 +12,7 @@
 
         public override void Process(Circuit circuit)
         {
-            circuit.Tick(signalIndex, this.Time);
+            circuit.Tick(this.signalIndex, this.Time);
         }
     }
 }

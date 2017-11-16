@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace MingLogic
+﻿namespace MingLogic
 {
+    using System;
+    using System.Collections.Generic;
+
     public class Clock : IComponent
     {
         public Clock()
         {
-            this.Ports = new HashSet<String> { "out" };
+            this.Ports = new HashSet<string> { "out" };
         }
 
         public ISet<string> Ports
