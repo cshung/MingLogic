@@ -42,8 +42,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Circuit.cs" />
+    <Compile Include="Components\AndComponent.cs" />
+    <Compile Include="Components\Clock.cs" />
+    <Compile Include="Components\CompositeComponent.cs" />
+    <Compile Include="Components\IComponent.cs" />
+    <Compile Include="Components\MappedComponent.cs" />
+    <Compile Include="Components\Probe.cs" />
     <Compile Include="ScheduledEvents\AndScheduledEvent.cs" />
     <Compile Include="ScheduledEvents\ScheduledEvent.cs" />
+    <Compile Include="ScheduledEvents\TickScheduledEvent.cs" />
     <Compile Include="SignalChangedHandlers\AndGateInputSignalChangedHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
