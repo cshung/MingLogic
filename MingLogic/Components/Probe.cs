@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace MingLogic
+﻿namespace MingLogic
 {
-    class Probe : IComponent
+    using System;
+    using System.Collections.Generic;
+
+    public class Probe : IComponent
     {
         public Probe()
         {
@@ -19,7 +18,7 @@ namespace MingLogic
 
         public void Build(Dictionary<string, int> portMapping, Circuit circuit)
         {
-            circuit.SetProbeProp(portMapping["in"]);
+            circuit.RegisterProbe(portMapping["in"]);
         }
     }
 }

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace MingLogic
+﻿namespace MingLogic
 {
-    class AndScheduledEvent : ScheduledEvent
+    public class AndScheduledEvent : ScheduledEvent
     {
         private int a;
         private int b;

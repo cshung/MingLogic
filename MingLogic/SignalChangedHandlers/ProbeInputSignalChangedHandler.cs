@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace MingLogic
+﻿namespace MingLogic
 {
-    class ProbeInputSignalChangedHandler : SignalChangedHandler
+    public class ProbeInputSignalChangedHandler : SignalChangedHandler
     {
         private int i;
 

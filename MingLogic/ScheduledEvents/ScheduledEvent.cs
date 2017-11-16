@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace MingLogic
+﻿namespace MingLogic
 {
-    abstract class ScheduledEvent
+    abstract public class ScheduledEvent
     {
         public int Time { get; set; }
         public abstract void Process(Circuit circuit);

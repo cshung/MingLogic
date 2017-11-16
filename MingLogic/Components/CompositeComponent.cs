@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace MingLogic
+﻿namespace MingLogic
 {
-    class CompositeComponent : IComponent
+    using System.Collections.Generic;
+
+    public class CompositeComponent : IComponent
     {
         public ISet<string> Ports { get; set; }
         public ISet<string> Signals { get; set; }

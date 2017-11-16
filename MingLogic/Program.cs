@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace MingLogic
+﻿namespace MingLogic
 {
-    class Program
+    using System.Collections.Generic;
+
+    public class Program
     {
         static void Main(string[] args)
         {

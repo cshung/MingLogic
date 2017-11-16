@@ -1,42 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace MingLogic
+﻿namespace MingLogic
 {
-    class Circuit
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    public class Circuit
     {
-        private List<List<SignalChangedHandler>> props = new List<List<SignalChangedHandler>>();
+        private List<List<SignalChangedHandler>> signalChangedHandlers = new List<List<SignalChangedHandler>>();
         private List<int> clocks = new List<int>();
 
         private bool[] signals;
         private List<ScheduledEvent> eventQueue;
 
-        internal int GetSignalNumber()
+        public int GetSignalNumber()
         {
-            props.Add(new List<SignalChangedHandler>());
-            return props.Count - 1;
+            signalChangedHandlers.Add(new List<SignalChangedHandler>());
+            return signalChangedHandlers.Count - 1;
         }
 
-        internal void SetAndProp(int a, int b, int o)
+        public void RegisterAndGate(int a, int b, int o)
         {
-            props[a].Add(new AndGateInputSignalChangedHandler(a, b, o));
-            props[b].Add(new AndGateInputSignalChangedHandler(a, b, o));
+            signalChangedHandlers[a].Add(new AndGateInputSignalChangedHandler(a, b, o));
+            signalChangedHandlers[b].Add(new AndGateInputSignalChangedHandler(a, b, o));
         }
 
-        internal void Clock(int o)
+        public void RegisterClock(int o)
         {
             this.clocks.Add(o);
         }
 
-        internal void SetProbeProp(int i)
+        public void RegisterProbe(int i)
         {
-            this.props[i].Add(new ProbeInputSignalChangedHandler(i));
+            this.signalChangedHandlers[i].Add(new ProbeInputSignalChangedHandler(i));
         }
 
         public void Run()
         {
-            this.signals = new bool[this.props.Count];
+            this.signals = new bool[this.signalChangedHandlers.Count];
             this.eventQueue = new List<ScheduledEvent>();
             foreach (var clock in this.clocks)
             {
@@ -50,10 +50,10 @@ namespace MingLogic
             }
         }
 
-        internal void Tick(int signalIndex, int time)
+        public void Tick(int signalIndex, int time)
         {
             this.signals[signalIndex] = !this.signals[signalIndex];
-            foreach (var prop in this.props[signalIndex])
+            foreach (var prop in this.signalChangedHandlers[signalIndex])
             {
                 prop.Run(this, time);
             }
@@ -61,22 +61,22 @@ namespace MingLogic
             this.eventQueue = this.eventQueue.OrderBy(e => e.Time).ToList();
         }
 
-        internal void AndProp(int a, int b, int o, int time)
+        public void PropagateAndGateInputChanged(int a, int b, int o, int time)
         {
             this.eventQueue.Add(new AndScheduledEvent(a, b, o, time + 2));
             this.eventQueue = this.eventQueue.OrderBy(e => e.Time).ToList();
         }
 
-        internal void And(int a, int b, int o, int time)
+        public void And(int a, int b, int o, int time)
         {
             this.signals[o] = this.signals[a] && this.signals[b];
-            foreach (var prop in this.props[o])
+            foreach (var prop in this.signalChangedHandlers[o])
             {
                 prop.Run(this, time);
             }
         }
 
-        internal void ProbeProp(int i, int time)
+        public void ProbeProp(int i, int time)
         {
             Console.WriteLine("Signal " + i + " at time " + time + " is " + signals[i]);
         }

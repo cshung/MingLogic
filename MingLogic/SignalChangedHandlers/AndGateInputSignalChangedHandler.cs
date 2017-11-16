@@ -1,6 +1,6 @@
 ﻿namespace MingLogic
 {
-    internal class AndGateInputSignalChangedHandler : SignalChangedHandler
+    public class AndGateInputSignalChangedHandler : SignalChangedHandler
     {
         int a;
         int b;
@@ -15,7 +15,7 @@
 
         public override void Run(Circuit circuit, int time)
         {
-            circuit.AndProp(a, b, o, time);
+            circuit.PropagateAndGateInputChanged(a, b, o, time);
         }
     }
 }

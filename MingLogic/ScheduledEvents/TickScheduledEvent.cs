@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace MingLogic
+﻿namespace MingLogic
 {
-    class TickScheduledEvent : ScheduledEvent
+    public class TickScheduledEvent : ScheduledEvent
     {
         private int signalIndex;
 

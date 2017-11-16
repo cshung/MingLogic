@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace MingLogic
 {
-    class Clock : IComponent
+    public class Clock : IComponent
     {
         public Clock()
         {
@@ -19,7 +18,7 @@ namespace MingLogic
 
         public void Build(Dictionary<string, int> portMapping, Circuit circuit)
         {
-            circuit.Clock(portMapping["out"]);
+            circuit.RegisterClock(portMapping["out"]);
         }
     }
 }

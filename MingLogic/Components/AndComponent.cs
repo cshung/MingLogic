@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace MingLogic
+﻿namespace MingLogic
 {
-    class AndComponent : IComponent
+    using System;
+    using System.Collections.Generic;
+
+    public class AndComponent : IComponent
     {
         public AndComponent()
         {
@@ -19,7 +18,7 @@ namespace MingLogic
 
         public void Build(Dictionary<string, int> portMapping, Circuit circuit)
         {
-            circuit.SetAndProp(portMapping["a"], portMapping["b"], portMapping["out"]);
+            circuit.RegisterAndGate(portMapping["a"], portMapping["b"], portMapping["out"]);
         }
     }
 }
