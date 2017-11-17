@@ -3,9 +3,9 @@
     using System;
     using System.Collections.Generic;
 
-    public class AndComponent : IComponent
+    public class NandGate : IComponent
     {
-        public AndComponent()
+        public NandGate()
         {
             this.Ports = new HashSet<string> { "a", "b", "out" };
         }
@@ -18,7 +18,7 @@
 
         public void Build(Dictionary<string, int> portMapping, Circuit circuit)
         {
-            circuit.RegisterAndGate(portMapping["a"], portMapping["b"], portMapping["out"]);
+            circuit.RegisterNandGate(portMapping["a"], portMapping["b"], portMapping["out"]);
         }
     }
 }

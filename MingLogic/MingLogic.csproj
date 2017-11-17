@@ -45,16 +45,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Circuit.cs" />
-    <Compile Include="Components\AndComponent.cs" />
+    <Compile Include="Components\Factories\ClockFactory.cs" />
+    <Compile Include="Components\Factories\CompositeComponentFactory.cs" />
+    <Compile Include="Components\Factories\MappedComponentFactory.cs" />
+    <Compile Include="Components\Factories\NandFactory.cs" />
+    <Compile Include="Components\Factories\ProbeFactory.cs" />
+    <Compile Include="Components\NandGate.cs" />
     <Compile Include="Components\Clock.cs" />
     <Compile Include="Components\CompositeComponent.cs" />
     <Compile Include="Components\IComponent.cs" />
+    <Compile Include="Components\Factories\IComponentFactory.cs" />
     <Compile Include="Components\MappedComponent.cs" />
     <Compile Include="Components\Probe.cs" />
-    <Compile Include="ScheduledEvents\AndScheduledEvent.cs" />
+    <Compile Include="ScheduledEvents\NandScheduledEvent.cs" />
     <Compile Include="ScheduledEvents\ScheduledEvent.cs" />
     <Compile Include="ScheduledEvents\TickScheduledEvent.cs" />
-    <Compile Include="SignalChangedHandlers\AndGateInputSignalChangedHandler.cs" />
+    <Compile Include="SignalChangedHandlers\NandGateInputSignalChangedHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignalChangedHandlers\ProbeInputSignalChangedHandler.cs" />

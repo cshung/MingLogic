@@ -1,12 +1,12 @@
 ﻿namespace MingLogic
 {
-    public class AndScheduledEvent : ScheduledEvent
+    public class NandScheduledEvent : ScheduledEvent
     {
         private int a;
         private int b;
         private int o;
 
-        public AndScheduledEvent(int a, int b, int o, int time)
+        public NandScheduledEvent(int a, int b, int o, int time)
         {
             this.a = a;
             this.b = b;
@@ -16,7 +16,7 @@
 
         public override void Process(Circuit circuit)
         {
-            circuit.OnAndGatePropagationDelayReached(this.a, this.b, this.o, this.Time);
+            circuit.OnNandGatePropagationDelayReached(this.a, this.b, this.o, this.Time);
         }
     }
 }

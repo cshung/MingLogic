@@ -18,10 +18,10 @@
             return this.signalChangedHandlers.Count - 1;
         }
 
-        public void RegisterAndGate(int a, int b, int o)
+        public void RegisterNandGate(int a, int b, int o)
         {
-            this.signalChangedHandlers[a].Add(new AndGateInputSignalChangedHandler(a, b, o));
-            this.signalChangedHandlers[b].Add(new AndGateInputSignalChangedHandler(a, b, o));
+            this.signalChangedHandlers[a].Add(new NandGateInputSignalChangedHandler(a, b, o));
+            this.signalChangedHandlers[b].Add(new NandGateInputSignalChangedHandler(a, b, o));
         }
 
         public void RegisterClock(int o)
@@ -58,15 +58,15 @@
             this.eventQueue = this.eventQueue.OrderBy(e => e.Time).ToList();
         }
 
-        public void PropagateAndGateInputChanged(int a, int b, int o, int time)
+        public void PropagateNandGateInputChanged(int a, int b, int o, int time)
         {
-            this.eventQueue.Add(new AndScheduledEvent(a, b, o, time + 2));
+            this.eventQueue.Add(new NandScheduledEvent(a, b, o, time + 1));
             this.eventQueue = this.eventQueue.OrderBy(e => e.Time).ToList();
         }
 
-        public void OnAndGatePropagationDelayReached(int a, int b, int o, int time)
+        public void OnNandGatePropagationDelayReached(int a, int b, int o, int time)
         {
-            this.SetSignalValue(o, this.signals[a] && this.signals[b], time);
+            this.SetSignalValue(o, !(this.signals[a] && this.signals[b]), time);
         }
 
         public void OnProbeInputSignalChanged(int i, int time)

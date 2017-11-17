@@ -1,12 +1,12 @@
 ﻿namespace MingLogic
 {
-    public class AndGateInputSignalChangedHandler : SignalChangedHandler
+    public class NandGateInputSignalChangedHandler : SignalChangedHandler
     {
         private int a;
         private int b;
         private int o;
 
-        public AndGateInputSignalChangedHandler(int a, int b, int o)
+        public NandGateInputSignalChangedHandler(int a, int b, int o)
         {
             this.a = a;
             this.b = b;
@@ -15,7 +15,7 @@
 
         public override void Run(Circuit circuit, int time)
         {
-            circuit.PropagateAndGateInputChanged(this.a, this.b, this.o, time);
+            circuit.PropagateNandGateInputChanged(this.a, this.b, this.o, time);
         }
     }
 }
