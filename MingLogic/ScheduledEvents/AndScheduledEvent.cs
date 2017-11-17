@@ -16,7 +16,7 @@
 
         public override void Process(Circuit circuit)
         {
-            circuit.And(this.a, this.b, this.o, this.Time);
+            circuit.OnAndGatePropagationDelayReached(this.a, this.b, this.o, this.Time);
         }
     }
 }

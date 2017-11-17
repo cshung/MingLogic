@@ -53,12 +53,7 @@
 
         public void Tick(int signalIndex, int time)
         {
-            this.signals[signalIndex] = !this.signals[signalIndex];
-            foreach (var prop in this.signalChangedHandlers[signalIndex])
-            {
-                prop.Run(this, time);
-            }
-
+            this.SetSignalValue(signalIndex, !this.signals[signalIndex], time);
             this.eventQueue.Add(new TickScheduledEvent(signalIndex, time + 10));
             this.eventQueue = this.eventQueue.OrderBy(e => e.Time).ToList();
         }
@@ -69,18 +64,27 @@
             this.eventQueue = this.eventQueue.OrderBy(e => e.Time).ToList();
         }
 
-        public void And(int a, int b, int o, int time)
+        public void OnAndGatePropagationDelayReached(int a, int b, int o, int time)
         {
-            this.signals[o] = this.signals[a] && this.signals[b];
-            foreach (var prop in this.signalChangedHandlers[o])
-            {
-                prop.Run(this, time);
-            }
+            this.SetSignalValue(o, this.signals[a] && this.signals[b], time);
         }
 
-        public void ProbeProp(int i, int time)
+        public void OnProbeInputSignalChanged(int i, int time)
         {
             Console.WriteLine("Signal " + i + " at time " + time + " is " + this.signals[i]);
+        }
+
+        private void SetSignalValue(int signalIndex, bool signalValue, int time)
+        {
+            bool originalSignalValue = this.signals[signalIndex];
+            this.signals[signalIndex] = signalValue;
+            if (originalSignalValue != signalValue)
+            {
+                foreach (var signalChangedHandler in this.signalChangedHandlers[signalIndex])
+                {
+                    signalChangedHandler.Run(this, time);
+                }
+            }
         }
     }
 }

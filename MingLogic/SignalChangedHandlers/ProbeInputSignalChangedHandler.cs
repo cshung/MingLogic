@@ -11,7 +11,7 @@
 
         public override void Run(Circuit circuit, int time)
         {
-            circuit.ProbeProp(this.i, time);
+            circuit.OnProbeInputSignalChanged(this.i, time);
         }
     }
 }
