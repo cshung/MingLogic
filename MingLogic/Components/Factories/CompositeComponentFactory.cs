@@ -10,7 +10,7 @@
 
         public List<MappedComponentFactory> MappedComponentFactories { get; set; }
 
-        public IComponent Build()
+        public IComponent Build(Dictionary<string, IComponentFactory> componentRepository)
         {
             CompositeComponent result = new CompositeComponent
             {
@@ -22,7 +22,8 @@
             {
                 MappedComponent mappedComponent = new MappedComponent();
                 mappedComponent.PortMapping = new Dictionary<string, string>(mappedComponentfactory.PortMapping);
-                mappedComponent.Component = mappedComponentfactory.ComponentFactory.Build();
+                IComponentFactory mappedComponentFactory = componentRepository[mappedComponentfactory.ComponentFactoryName];
+                mappedComponent.Component = mappedComponentFactory.Build(componentRepository);
                 result.MappedComponents.Add(mappedComponent);
             }
 

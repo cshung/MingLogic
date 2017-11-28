@@ -1,7 +1,9 @@
 ﻿namespace MingLogic
 {
+    using System.Collections.Generic;
+
     public interface IComponentFactory
     {
-        IComponent Build();
+        IComponent Build(Dictionary<string, IComponentFactory> componentRepository);
     }
 }

@@ -15,17 +15,17 @@
                     new MappedComponentFactory
                     {
                         PortMapping = new Dictionary<string, string> { { "a", "a" }, { "b", "b" }, { "out", "n" } },
-                        ComponentFactory = new NandFactory()
+                        ComponentFactoryName = "Nand"
                     },
                     new MappedComponentFactory
                     {
                         PortMapping = new Dictionary<string, string> { { "a", "n" }, { "b", "n" }, { "out", "out" } },
-                        ComponentFactory = new NandFactory()
+                        ComponentFactoryName = "Nand"
                     }
                 }
             };
 
-            CompositeComponentFactory boardFactory = new CompositeComponentFactory
+            CompositeComponentFactory testBenchFactory = new CompositeComponentFactory
             {
                 Ports = new HashSet<string> { },
                 Signals = new HashSet<string> { "clock", "probe" },
@@ -34,24 +34,32 @@
                     new MappedComponentFactory
                     {
                         PortMapping = new Dictionary<string, string> { { "out", "clock" } },
-                        ComponentFactory = new ClockFactory(),
+                        ComponentFactoryName = "Clock",
                     },
                     new MappedComponentFactory
                     {
                         PortMapping = new Dictionary<string, string> { { "a", "clock" }, { "b", "clock" }, { "out", "probe" } },
-                        ComponentFactory = andGate,
+                        ComponentFactoryName = "And"
                     },
                     new MappedComponentFactory
                     {
                         PortMapping = new Dictionary<string, string> { { "in", "probe" } },
-                        ComponentFactory = new ProbeFactory()
+                        ComponentFactoryName = "Probe"
                     }
                 }
             };
 
-            IComponent board = boardFactory.Build();
+            var componentRepository = new Dictionary<string, IComponentFactory>
+            {
+                { "And", andGate },
+                { "Nand", new NandFactory() },
+                { "Clock", new ClockFactory() },
+                { "Probe", new ProbeFactory() },
+            };
+
+            IComponent testBench = testBenchFactory.Build(componentRepository);
             Circuit circuit = new Circuit();
-            board.Build(new Dictionary<string, int>(), circuit);
+            testBench.Build(new Dictionary<string, int>(), circuit);
             circuit.Run();
         }
     }

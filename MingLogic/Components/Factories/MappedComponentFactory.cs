@@ -4,7 +4,7 @@
 
     public class MappedComponentFactory
     {
-        public IComponentFactory ComponentFactory { get; set; }
+        public string ComponentFactoryName { get; set; }
 
         public Dictionary<string, string> PortMapping { get; set; }
     }
