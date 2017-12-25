@@ -9,7 +9,7 @@
         private List<List<SignalChangedHandler>> signalChangedHandlers = new List<List<SignalChangedHandler>>();
         private Dictionary<int, List<Tuple<int, bool>>> inputs = new Dictionary<int, List<Tuple<int, bool>>>();
 
-        private bool[] signals;
+        private Nullable<bool>[] signals;
         private List<ScheduledEvent> eventQueue;
 
         public int GetSignalNumber()
@@ -29,14 +29,14 @@
             this.signalChangedHandlers[b].Add(new NandGateInputSignalChangedHandler(a, b, o));
         }
 
-        public void RegisterProbe(int i)
+        public void RegisterProbe(int i, string name)
         {
-            this.signalChangedHandlers[i].Add(new ProbeInputSignalChangedHandler(i));
+            this.signalChangedHandlers[i].Add(new ProbeInputSignalChangedHandler(i, name));
         }
 
         public void Run()
         {
-            this.signals = new bool[this.signalChangedHandlers.Count];
+            this.signals = new bool?[this.signalChangedHandlers.Count];
             this.eventQueue = new List<ScheduledEvent>();
             foreach (var input in this.inputs)
             {
@@ -71,17 +71,23 @@
 
         public void OnNandGatePropagationDelayReached(int a, int b, int o, int time)
         {
-            this.SetSignalValue(o, !(this.signals[a] && this.signals[b]), time);
+            bool? result = null;
+            if (this.signals[a].HasValue && this.signals[b].HasValue)
+            {
+                result = !(this.signals[a].Value && this.signals[b].Value);
+            }
+
+            this.SetSignalValue(o, result, time);
         }
 
-        public void OnProbeInputSignalChanged(int i, int time)
+        public void OnProbeInputSignalChanged(int i, string name, int time)
         {
-            Console.WriteLine("Signal " + i + " at time " + time + " is " + this.signals[i]);
+            Console.WriteLine("Signal " + name + " at time " + time + " is " + this.signals[i]);
         }
 
-        private void SetSignalValue(int signalIndex, bool signalValue, int time)
+        private void SetSignalValue(int signalIndex, bool? signalValue, int time)
         {
-            bool originalSignalValue = this.signals[signalIndex];
+            bool? originalSignalValue = this.signals[signalIndex];
             this.signals[signalIndex] = signalValue;
             if (originalSignalValue != signalValue)
             {

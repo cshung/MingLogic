@@ -5,8 +5,11 @@
 
     public class Probe : IComponent
     {
-        public Probe()
+        private string name;
+
+        public Probe(string name)
         {
+            this.name = name;
             this.Ports = new HashSet<string> { "in" };
         }
 
@@ -18,7 +21,7 @@
 
         public void Build(Dictionary<string, int> portMapping, Circuit circuit)
         {
-            circuit.RegisterProbe(portMapping["in"]);
+            circuit.RegisterProbe(portMapping["in"], this.name);
         }
     }
 }

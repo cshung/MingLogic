@@ -15,7 +15,7 @@
       }
     },
     {
-      "ComponentFactoryName": "Probe",
+      "ComponentFactoryName": "probeOut",
       "PortMapping": { "in": "probe" }
     }
   ]

@@ -11,11 +11,11 @@
         {
             string[] components = new string[] { "andGate", "testBenchFactory" };
             string[] inputs = new string[] { "input" };
+            string[] probes = new string[] { "probeOut" };
 
             var componentRepository = new Dictionary<string, IComponentFactory>
             {
                 { "Nand", new NandFactory() },
-                { "Probe", new ProbeFactory() },
             };
 
             foreach (string component in components)
@@ -30,6 +30,11 @@
                 string inputDefinition = File.ReadAllText(input + ".json");
                 InputFactory inputFactory = JsonConvert.DeserializeObject<InputFactory>(inputDefinition);
                 componentRepository.Add(input, inputFactory);
+            }
+
+            foreach (string probe in probes)
+            {
+                componentRepository.Add(probe, new ProbeFactory { Name = probe });
             }
 
             IComponentFactory testBenchFactory = componentRepository["testBenchFactory"];
