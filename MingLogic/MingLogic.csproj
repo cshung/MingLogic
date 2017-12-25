@@ -48,13 +48,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Circuit.cs" />
-    <Compile Include="Components\Factories\ClockFactory.cs" />
     <Compile Include="Components\Factories\CompositeComponentFactory.cs" />
+    <Compile Include="Components\Factories\InputFactory.cs" />
     <Compile Include="Components\Factories\MappedComponentFactory.cs" />
     <Compile Include="Components\Factories\NandFactory.cs" />
     <Compile Include="Components\Factories\ProbeFactory.cs" />
+    <Compile Include="Components\Input.cs" />
     <Compile Include="Components\NandGate.cs" />
-    <Compile Include="Components\Clock.cs" />
     <Compile Include="Components\CompositeComponent.cs" />
     <Compile Include="Components\IComponent.cs" />
     <Compile Include="Components\Factories\IComponentFactory.cs" />
@@ -62,7 +62,7 @@
     <Compile Include="Components\Probe.cs" />
     <Compile Include="ScheduledEvents\NandScheduledEvent.cs" />
     <Compile Include="ScheduledEvents\ScheduledEvent.cs" />
-    <Compile Include="ScheduledEvents\TickScheduledEvent.cs" />
+    <Compile Include="ScheduledEvents\InputScheduledEvent.cs" />
     <Compile Include="SignalChangedHandlers\NandGateInputSignalChangedHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,6 +74,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="App.config" />
+    <None Include="input.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="testBenchFactory.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

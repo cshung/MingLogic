@@ -1,16 +1,16 @@
 ﻿{
   "Ports": [],
-  "Signals": [ "clock", "probe" ],
+  "Signals": [ "input", "probe" ],
   "MappedComponentFactories": [
     {
-      "ComponentFactoryName": "Clock",
-      "PortMapping": { "out": "clock" }
+      "ComponentFactoryName": "input",
+      "PortMapping": { "out": "input" }
     },
     {
       "ComponentFactoryName": "andGate",
       "PortMapping": {
-        "a": "clock",
-        "b": "clock",
+        "a": "input",
+        "b": "input",
         "out": "probe"
       }
     },

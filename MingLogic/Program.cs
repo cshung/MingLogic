@@ -1,5 +1,6 @@
 ﻿namespace MingLogic
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using Newtonsoft.Json;
@@ -8,20 +9,27 @@
     {
         public static void Main(string[] args)
         {
+            string[] components = new string[] { "andGate", "testBenchFactory" };
+            string[] inputs = new string[] { "input" };
+
             var componentRepository = new Dictionary<string, IComponentFactory>
             {
                 { "Nand", new NandFactory() },
-                { "Clock", new ClockFactory() },
                 { "Probe", new ProbeFactory() },
             };
-
-            string[] components = new string[] { "andGate", "testBenchFactory" };
 
             foreach (string component in components)
             {
                 string componentDefinition = File.ReadAllText(component + ".json");
                 CompositeComponentFactory componentFactory = JsonConvert.DeserializeObject<CompositeComponentFactory>(componentDefinition);
                 componentRepository.Add(component, componentFactory);
+            }
+
+            foreach (string input in inputs)
+            {
+                string inputDefinition = File.ReadAllText(input + ".json");
+                InputFactory inputFactory = JsonConvert.DeserializeObject<InputFactory>(inputDefinition);
+                componentRepository.Add(input, inputFactory);
             }
 
             IComponentFactory testBenchFactory = componentRepository["testBenchFactory"];

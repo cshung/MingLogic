@@ -7,7 +7,7 @@
     public class Circuit
     {
         private List<List<SignalChangedHandler>> signalChangedHandlers = new List<List<SignalChangedHandler>>();
-        private List<int> clocks = new List<int>();
+        private Dictionary<int, List<Tuple<int, bool>>> inputs = new Dictionary<int, List<Tuple<int, bool>>>();
 
         private bool[] signals;
         private List<ScheduledEvent> eventQueue;
@@ -18,15 +18,15 @@
             return this.signalChangedHandlers.Count - 1;
         }
 
+        public void RegisterInput(int v, List<Tuple<int, bool>> inputs)
+        {
+            this.inputs.Add(v, inputs);
+        }
+
         public void RegisterNandGate(int a, int b, int o)
         {
             this.signalChangedHandlers[a].Add(new NandGateInputSignalChangedHandler(a, b, o));
             this.signalChangedHandlers[b].Add(new NandGateInputSignalChangedHandler(a, b, o));
-        }
-
-        public void RegisterClock(int o)
-        {
-            this.clocks.Add(o);
         }
 
         public void RegisterProbe(int i)
@@ -38,12 +38,12 @@
         {
             this.signals = new bool[this.signalChangedHandlers.Count];
             this.eventQueue = new List<ScheduledEvent>();
-            foreach (var clock in this.clocks)
+            foreach (var input in this.inputs)
             {
-                this.eventQueue.Add(new TickScheduledEvent(0, clock));
+                this.eventQueue.Add(new InputScheduledEvent(input.Key, 0, 0));
             }
 
-            for (int i = 0; i < 100; i++)
+            while (this.eventQueue.Count > 0)
             {
                 ScheduledEvent e = this.eventQueue[0];
                 this.eventQueue.RemoveAt(0);
@@ -51,11 +51,16 @@
             }
         }
 
-        public void Tick(int signalIndex, int time)
+        public void OnInputScheduledEvent(int signalIndex, int index, int time)
         {
-            this.SetSignalValue(signalIndex, !this.signals[signalIndex], time);
-            this.eventQueue.Add(new TickScheduledEvent(signalIndex, time + 10));
-            this.eventQueue = this.eventQueue.OrderBy(e => e.Time).ToList();
+            List<Tuple<int, bool>> inputs = this.inputs[signalIndex];
+            this.SetSignalValue(signalIndex, inputs[index].Item2, time);
+            int nextIndex = index + 1;
+            if (nextIndex < inputs.Count)
+            {
+                this.eventQueue.Add(new InputScheduledEvent(signalIndex, nextIndex, inputs[nextIndex].Item1));
+                this.eventQueue = this.eventQueue.OrderBy(e => e.Time).ToList();
+            }
         }
 
         public void PropagateNandGateInputChanged(int a, int b, int o, int time)

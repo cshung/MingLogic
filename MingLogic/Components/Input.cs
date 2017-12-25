@@ -3,10 +3,13 @@
     using System;
     using System.Collections.Generic;
 
-    public class Clock : IComponent
+    public class Input : IComponent
     {
-        public Clock()
+        private List<Tuple<int, bool>> inputs;
+
+        public Input(List<Tuple<int, bool>> inputs)
         {
+            this.inputs = inputs;
             this.Ports = new HashSet<string> { "out" };
         }
 
@@ -18,7 +21,7 @@
 
         public void Build(Dictionary<string, int> portMapping, Circuit circuit)
         {
-            circuit.RegisterClock(portMapping["out"]);
+            circuit.RegisterInput(portMapping["out"], this.inputs);
         }
     }
 }
