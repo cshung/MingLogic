@@ -1,27 +1,28 @@
 ﻿{
   "Ports": [],
-  "Signals": [ "d", "clock", "q", "nq" ],
+  "Signals": [ "e", "clock", "out" ],
   "MappedComponentFactories": [
-    {
-      "ComponentFactoryName": "input",
-      "PortMapping": { "out": "d" }
-    },
     {
       "ComponentFactoryName": "clock",
       "PortMapping": { "out": "clock" }
     },
     {
-      "ComponentFactoryName": "dff",
+      "ComponentFactoryName": "input",
+      "PortMapping": { "out": "e" }
+    },
+    {
+      "ComponentFactoryName": "divider",
       "PortMapping": {
-        "d": "d",
+        "e": "e",
         "clock": "clock",
-        "q": "q",
-        "nq": "nq"
+        "out": "out"
       }
     },
     {
-      "ComponentFactoryName": "q",
-      "PortMapping": { "in": "q" }
+      "ComponentFactoryName": "out",
+      "PortMapping": {
+        "in": "out"
+      }
     }
   ]
 }

@@ -70,6 +70,9 @@
     <Compile Include="SignalChangedHandlers\SignalChangedHandler.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="or.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="and.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -83,10 +86,16 @@
     <None Include="dff.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="counter.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="not.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="divider.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="testBench.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

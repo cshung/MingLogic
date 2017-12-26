@@ -1,0 +1,28 @@
+﻿{
+  "Ports": [ "a", "b", "out" ],
+  "Signals": [ "na", "nb" ],
+  "MappedComponentFactories": [
+    {
+      "ComponentFactoryName": "not",
+      "PortMapping": {
+        "in": "a",
+        "out": "na"
+      }
+    },
+    {
+      "ComponentFactoryName": "not",
+      "PortMapping": {
+        "in": "b",
+        "out": "nb"
+      }
+    },
+    {
+      "ComponentFactoryName": "nand",
+      "PortMapping": {
+        "a": "na",
+        "b": "nb",
+        "out": "out"
+      }
+    }
+  ]
+}

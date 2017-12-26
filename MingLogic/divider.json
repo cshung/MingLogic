@@ -1,0 +1,55 @@
+﻿{
+  "Ports": [ "e", "clock", "out" ],
+  "Signals": [ "pq1", "pq2", "nq1", "nq2", "nclock", "pq", "nq" ],
+  "MappedComponentFactories": [
+    {
+      "ComponentFactoryName": "not",
+      "PortMapping": {
+        "in": "clock",
+        "out": "nclock"
+      }
+    },
+    {
+      "ComponentFactoryName": "counter",
+      "PortMapping": {
+        "e": "e",
+        "clock": "clock",
+        "q1": "pq1",
+        "q2": "pq2"
+      }
+    },
+    {
+      "ComponentFactoryName": "counter",
+      "PortMapping": {
+        "e": "e",
+        "clock": "nclock",
+        "q1": "nq1",
+        "q2": "nq2"
+      }
+    },
+    {
+      "ComponentFactoryName": "and",
+      "PortMapping": {
+        "a": "pq1",
+        "b": "pq2",
+        "out": "pq"
+      }
+    },
+    {
+      "ComponentFactoryName": "and",
+      "PortMapping": {
+        "a": "nq1",
+        "b": "nq2",
+        "out": "nq"
+      }
+    },
+    {
+      "ComponentFactoryName": "or",
+      "PortMapping": {
+        "a": "pq",
+        "b": "nq",
+        "out": "out"
+      }
+    }
+  ]
+}

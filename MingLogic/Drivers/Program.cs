@@ -8,9 +8,9 @@
     {
         public static void Main(string[] args)
         {
-            string[] components = new string[] { "and", "not", "xor", "3nand", "dff", "testBench" };
+            string[] components = new string[] { "and", "or", "not", "xor", "3nand", "dff", "counter", "divider", "testBench" };
             string[] inputs = new string[] { "input", "clock" };
-            string[] probes = new string[] { "q" };
+            string[] probes = new string[] { "out" };
 
             var componentRepository = new Dictionary<string, IComponentFactory>
             {
