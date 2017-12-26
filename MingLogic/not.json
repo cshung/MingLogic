@@ -1,0 +1,14 @@
+﻿{
+  "Ports": [ "in", "out" ],
+  "Signals": [],
+  "MappedComponentFactories": [
+    {
+      "ComponentFactoryName": "nand",
+      "PortMapping": {
+        "a": "in",
+        "b": "in",
+        "out": "out"
+      }
+    }
+  ]
+}

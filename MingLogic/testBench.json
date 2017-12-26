@@ -1,0 +1,26 @@
+﻿{
+  "Ports": [],
+  "Signals": [ "a", "b", "probe" ],
+  "MappedComponentFactories": [
+    {
+      "ComponentFactoryName": "input1",
+      "PortMapping": { "out": "a" }
+    },
+    {
+      "ComponentFactoryName": "input2",
+      "PortMapping": { "out": "b" }
+    },
+    {
+      "ComponentFactoryName": "xor",
+      "PortMapping": {
+        "a": "a",
+        "b": "b",
+        "out": "probe"
+      }
+    },
+    {
+      "ComponentFactoryName": "probeOut",
+      "PortMapping": { "in": "probe" }
+    }
+  ]
+}

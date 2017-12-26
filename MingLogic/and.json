@@ -3,7 +3,7 @@
   "Signals": [ "n" ],
   "MappedComponentFactories": [
     {
-      "ComponentFactoryName": "Nand",
+      "ComponentFactoryName": "nand",
       "PortMapping": {
         "a": "a",
         "b": "b",
@@ -11,7 +11,7 @@
       }
     },
     {
-      "ComponentFactoryName": "Nand",
+      "ComponentFactoryName": "nand",
       "PortMapping": {
         "a": "n",
         "b": "n",

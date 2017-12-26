@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Circuit.cs" />
+    <Compile Include="Drivers\Circuit.cs" />
     <Compile Include="Components\Factories\CompositeComponentFactory.cs" />
     <Compile Include="Components\Factories\InputFactory.cs" />
     <Compile Include="Components\Factories\MappedComponentFactory.cs" />
@@ -64,21 +64,30 @@
     <Compile Include="ScheduledEvents\ScheduledEvent.cs" />
     <Compile Include="ScheduledEvents\InputScheduledEvent.cs" />
     <Compile Include="SignalChangedHandlers\NandGateInputSignalChangedHandler.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Drivers\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignalChangedHandlers\ProbeInputSignalChangedHandler.cs" />
     <Compile Include="SignalChangedHandlers\SignalChangedHandler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="andGate.json">
+    <None Include="and.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="App.config" />
-    <None Include="input.json">
+    <None Include="input1.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="input2.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="not.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
-    <None Include="testBenchFactory.json">
+    <None Include="testBench.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="xor.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -1,6 +1,5 @@
 ﻿namespace MingLogic
 {
-    using System;
     using System.Collections.Generic;
     using System.IO;
     using Newtonsoft.Json;
@@ -9,13 +8,13 @@
     {
         public static void Main(string[] args)
         {
-            string[] components = new string[] { "andGate", "testBenchFactory" };
-            string[] inputs = new string[] { "input" };
+            string[] components = new string[] { "and", "not", "xor", "testBench" };
+            string[] inputs = new string[] { "input1", "input2" };
             string[] probes = new string[] { "probeOut" };
 
             var componentRepository = new Dictionary<string, IComponentFactory>
             {
-                { "Nand", new NandFactory() },
+                { "nand", new NandFactory() },
             };
 
             foreach (string component in components)
@@ -37,7 +36,7 @@
                 componentRepository.Add(probe, new ProbeFactory { Name = probe });
             }
 
-            IComponentFactory testBenchFactory = componentRepository["testBenchFactory"];
+            IComponentFactory testBenchFactory = componentRepository["testBench"];
             IComponent testBench = testBenchFactory.Build(componentRepository);
             Circuit circuit = new Circuit();
             testBench.Build(new Dictionary<string, int>(), circuit);
