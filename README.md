@@ -27,6 +27,56 @@ Third, we build an event queue. This event queue is used to drive the circuit si
 
 Fourth, for each event in the event queue, we process it. When a signal changes, a propagation is computed, and an event is pushed to the event queue. The simulation ends when the event queue is emptied.
 
+## Example
+
 An XOR gate is included as an example how one can use the simulator and build interesting circuits.
 
-Enjoy!
+And XOR gate is defined in xor.json as follow:
+
+```
+{
+  "Ports": [ "a", "b", "out" ],
+  "Signals": [ "na", "nb", "nand1", "nand2" ],
+  "MappedComponentFactories": [
+    {
+      "ComponentFactoryName": "not",
+      "PortMapping": {
+        "in": "a",
+        "out": "na"
+      }
+    },
+    {
+      "ComponentFactoryName": "not",
+      "PortMapping": {
+        "in": "b",
+        "out": "nb"
+      }
+    },
+    {
+      "ComponentFactoryName": "nand",
+      "PortMapping": {
+        "a": "a",
+        "b": "nb",
+        "out": "nand1"
+      }
+    },
+    {
+      "ComponentFactoryName": "nand",
+      "PortMapping": {
+        "a": "na",
+        "b": "b",
+        "out": "nand2"
+      }
+    },
+    {
+      "ComponentFactoryName": "nand",
+      "PortMapping": {
+        "a": "nand1",
+        "b": "nand2",
+        "out": "out"
+      }
+    }
+  ]
+}
+```
+This should be self explanatory, to build a xor gate, I need two not gates and 3 nand gates. `a` and `b` are connected to the not gate to get the `na` and `nb` signals. The signals are in turn connected to nand gates to produce the final output.
