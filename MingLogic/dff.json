@@ -1,0 +1,56 @@
+﻿{
+  "_comment" : "A positive edge triggered D flip flop",
+  "Ports": [ "d", "clock", "q", "nq" ],
+  "Signals": [ "s", "ns", "r", "nr" ],
+  "MappedComponentFactories": [
+    {
+      "ComponentFactoryName": "nand",
+      "PortMapping": {
+        "a": "nr",
+        "b": "s",
+        "out": "ns"
+      }
+    },
+    {
+      "ComponentFactoryName": "nand",
+      "PortMapping": {
+        "a": "ns",
+        "b": "clock",
+        "out": "s"
+      }
+    },
+    {
+      "ComponentFactoryName": "3nand",
+      "PortMapping": {
+        "a": "s",
+        "b": "clock",
+        "c": "nr",
+        "out": "r"
+      }
+    },
+    {
+      "ComponentFactoryName": "nand",
+      "PortMapping": {
+        "a": "r",
+        "b": "d",
+        "out": "nr"
+      }
+    },
+    {
+      "ComponentFactoryName": "nand",
+      "PortMapping": {
+        "a": "s",
+        "b": "nq",
+        "out": "q"
+      }
+    },
+    {
+      "ComponentFactoryName": "nand",
+      "PortMapping": {
+        "a": "r",
+        "b": "q",
+        "out": "nq"
+      }
+    }
+  ]
+}

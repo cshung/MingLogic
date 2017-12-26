@@ -72,7 +72,15 @@
         public void OnNandGatePropagationDelayReached(int a, int b, int o, int time)
         {
             bool? result = null;
-            if (this.signals[a].HasValue && this.signals[b].HasValue)
+            if (this.signals[a].HasValue && !this.signals[a].Value)
+            {
+                result = true;
+            }
+            else if (this.signals[b].HasValue && !this.signals[b].Value)
+            {
+                result = true;
+            }
+            else if (this.signals[a].HasValue && this.signals[b].HasValue)
             {
                 result = !(this.signals[a].Value && this.signals[b].Value);
             }

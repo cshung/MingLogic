@@ -1,0 +1,32 @@
+﻿{
+  "Inputs": [
+    {
+      "Item1": 0,
+      "Item2": false
+    },
+    {
+      "Item1": 100,
+      "Item2": true
+    },
+    {
+      "Item1": 200,
+      "Item2": false
+    },
+    {
+      "Item1": 300,
+      "Item2": true
+    },
+    {
+      "Item1": 400,
+      "Item2": false
+    },
+    {
+      "Item1": 500,
+      "Item2": true
+    },
+    {
+      "Item1": 600,
+      "Item2": false
+    }
+  ]
+}

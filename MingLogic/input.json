@@ -5,12 +5,8 @@
       "Item2": false
     },
     {
-      "Item1": 10,
+      "Item1": 150,
       "Item2": true
-    },
-    {
-      "Item1": 30,
-      "Item2": false
     }
   ]
 }
