@@ -5,7 +5,7 @@
         private int signalIndex;
         private int index;
 
-        public InputScheduledEvent(int signalIndex, int index, int time)
+        public InputScheduledEvent(int signalIndex, int index, float time)
         {
             this.signalIndex = signalIndex;
             this.index = index;

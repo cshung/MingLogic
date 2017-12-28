@@ -11,7 +11,7 @@
             this.name = name;
         }
 
-        public override void Run(Circuit circuit, int time)
+        public override void Run(Circuit circuit, float time)
         {
             circuit.OnProbeInputSignalChanged(this.i, this.name, time);
         }

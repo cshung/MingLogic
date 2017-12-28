@@ -6,7 +6,7 @@
         private int b;
         private int o;
 
-        public NandScheduledEvent(int a, int b, int o, int time)
+        public NandScheduledEvent(int a, int b, int o, float time)
         {
             this.a = a;
             this.b = b;

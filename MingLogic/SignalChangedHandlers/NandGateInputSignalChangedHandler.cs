@@ -13,7 +13,7 @@
             this.o = o;
         }
 
-        public override void Run(Circuit circuit, int time)
+        public override void Run(Circuit circuit, float time)
         {
             circuit.PropagateNandGateInputChanged(this.a, this.b, this.o, time);
         }

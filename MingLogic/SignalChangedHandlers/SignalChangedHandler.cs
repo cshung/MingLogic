@@ -2,6 +2,6 @@
 {
     public abstract class SignalChangedHandler
     {
-        public abstract void Run(Circuit circuit, int time);
+        public abstract void Run(Circuit circuit, float time);
     }
 }

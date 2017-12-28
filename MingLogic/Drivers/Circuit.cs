@@ -8,6 +8,7 @@
     {
         private List<List<SignalChangedHandler>> signalChangedHandlers = new List<List<SignalChangedHandler>>();
         private Dictionary<int, List<Tuple<int, bool>>> inputs = new Dictionary<int, List<Tuple<int, bool>>>();
+        private Random random = new Random();
 
         private Nullable<bool>[] signals;
         private List<ScheduledEvent> eventQueue;
@@ -51,7 +52,7 @@
             }
         }
 
-        public void OnInputScheduledEvent(int signalIndex, int index, int time)
+        public void OnInputScheduledEvent(int signalIndex, int index, float time)
         {
             List<Tuple<int, bool>> inputs = this.inputs[signalIndex];
             this.SetSignalValue(signalIndex, inputs[index].Item2, time);
@@ -63,13 +64,14 @@
             }
         }
 
-        public void PropagateNandGateInputChanged(int a, int b, int o, int time)
+        public void PropagateNandGateInputChanged(int a, int b, int o, float time)
         {
-            this.eventQueue.Add(new NandScheduledEvent(a, b, o, time + 1));
+            float delay = this.GetRandomDelay();
+            this.eventQueue.Add(new NandScheduledEvent(a, b, o, time + delay));
             this.eventQueue = this.eventQueue.OrderBy(e => e.Time).ToList();
         }
 
-        public void OnNandGatePropagationDelayReached(int a, int b, int o, int time)
+        public void OnNandGatePropagationDelayReached(int a, int b, int o, float time)
         {
             bool? result = null;
             if (this.signals[a].HasValue && !this.signals[a].Value)
@@ -88,12 +90,12 @@
             this.SetSignalValue(o, result, time);
         }
 
-        public void OnProbeInputSignalChanged(int i, string name, int time)
+        public void OnProbeInputSignalChanged(int i, string name, float time)
         {
             Console.WriteLine("Signal " + name + " at time " + time + " is " + this.signals[i]);
         }
 
-        private void SetSignalValue(int signalIndex, bool? signalValue, int time)
+        private void SetSignalValue(int signalIndex, bool? signalValue, float time)
         {
             bool? originalSignalValue = this.signals[signalIndex];
             this.signals[signalIndex] = signalValue;
@@ -104,6 +106,11 @@
                     signalChangedHandler.Run(this, time);
                 }
             }
+        }
+
+        private float GetRandomDelay()
+        {
+            return (float)this.random.NextDouble();
         }
     }
 }
