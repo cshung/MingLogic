@@ -11,7 +11,7 @@
         private Random random = new Random();
 
         private Nullable<bool>[] signals;
-        private List<ScheduledEvent> eventQueue;
+        private EventQueue eventQueue;
 
         public int GetSignalNumber()
         {
@@ -38,16 +38,15 @@
         public void Run()
         {
             this.signals = new bool?[this.signalChangedHandlers.Count];
-            this.eventQueue = new List<ScheduledEvent>();
+            this.eventQueue = new EventQueue();
             foreach (var input in this.inputs)
             {
-                this.eventQueue.Add(new InputScheduledEvent(input.Key, 0, 0));
+                this.eventQueue.Enqueue(new InputScheduledEvent(input.Key, 0, 0));
             }
 
-            while (this.eventQueue.Count > 0)
+            while (!this.eventQueue.IsEmpty())
             {
-                ScheduledEvent e = this.eventQueue[0];
-                this.eventQueue.RemoveAt(0);
+                ScheduledEvent e = this.eventQueue.DeleteMin();
                 e.Process(this);
             }
         }
@@ -59,16 +58,14 @@
             int nextIndex = index + 1;
             if (nextIndex < inputs.Count)
             {
-                this.eventQueue.Add(new InputScheduledEvent(signalIndex, nextIndex, inputs[nextIndex].Item1));
-                this.eventQueue = this.eventQueue.OrderBy(e => e.Time).ToList();
+                this.eventQueue.Enqueue(new InputScheduledEvent(signalIndex, nextIndex, inputs[nextIndex].Item1));
             }
         }
 
         public void PropagateNandGateInputChanged(int a, int b, int o, float time)
         {
             float delay = this.GetRandomDelay();
-            this.eventQueue.Add(new NandScheduledEvent(a, b, o, time + delay));
-            this.eventQueue = this.eventQueue.OrderBy(e => e.Time).ToList();
+            this.eventQueue.Enqueue(new NandScheduledEvent(a, b, o, time + delay));
         }
 
         public void OnNandGatePropagationDelayReached(int a, int b, int o, float time)
