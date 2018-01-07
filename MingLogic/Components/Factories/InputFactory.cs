@@ -5,6 +5,14 @@
 
     public class InputFactory : IComponentFactory
     {
+        public ISet<string> Ports
+        {
+            get
+            {
+                return new HashSet<string> { "out" };
+            }
+        }
+
         public List<Tuple<int, bool>> Inputs
         {
             get;
@@ -14,6 +22,11 @@
         public IComponent Build(Dictionary<string, IComponentFactory> componentRepository)
         {
             return new Input(this.Inputs);
+        }
+
+        public bool Check(Dictionary<string, IComponentFactory> componentRepository)
+        {
+            return true;
         }
     }
 }

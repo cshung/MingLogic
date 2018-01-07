@@ -1,5 +1,6 @@
 ﻿namespace MingLogic
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using Newtonsoft.Json;
@@ -37,6 +38,12 @@
             }
 
             IComponentFactory testBenchFactory = componentRepository["testBench"];
+            if (!testBenchFactory.Check(componentRepository))
+            {
+                Console.WriteLine("This circuit definition is invalid");
+                return;
+            }
+
             IComponent testBench = testBenchFactory.Build(componentRepository);
             Circuit circuit = new Circuit();
             testBench.Build(new Dictionary<string, int>(), circuit);
