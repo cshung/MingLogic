@@ -1,5 +1,5 @@
 # MingLogic
-A prototype digital logic simulator
+A prototype digital logic simulator.
 
 ## Goal
 The goal of this project is to show how one can build a digital logic simulator that can simulator a digital circuit. 
