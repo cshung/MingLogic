@@ -60,6 +60,7 @@
     <Compile Include="Components\Factories\IComponentFactory.cs" />
     <Compile Include="Components\MappedComponent.cs" />
     <Compile Include="Components\Probe.cs" />
+    <Compile Include="Drivers\Project.cs" />
     <Compile Include="EventQueue\EventQueue.cs" />
     <Compile Include="ScheduledEvents\NandScheduledEvent.cs" />
     <Compile Include="ScheduledEvents\ScheduledEvent.cs" />
@@ -101,6 +102,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="3nand.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="project.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="xor.json">

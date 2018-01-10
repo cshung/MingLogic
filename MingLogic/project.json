@@ -1,0 +1,5 @@
+﻿{
+  "Components": [ "and", "or", "not", "xor", "3nand", "dff", "counter", "divider", "testBench" ],
+  "Inputs": [ "input", "clock" ],
+  "Probes": [ "out" ]
+}

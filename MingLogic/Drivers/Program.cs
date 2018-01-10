@@ -9,30 +9,28 @@
     {
         public static void Main(string[] args)
         {
-            string[] components = new string[] { "and", "or", "not", "xor", "3nand", "dff", "counter", "divider", "testBench" };
-            string[] inputs = new string[] { "input", "clock" };
-            string[] probes = new string[] { "out" };
+            Project project = JsonConvert.DeserializeObject<Project>(File.ReadAllText("project.json"));
 
             var componentRepository = new Dictionary<string, IComponentFactory>
             {
                 { "nand", new NandFactory() },
             };
 
-            foreach (string component in components)
+            foreach (string component in project.Components)
             {
                 string componentDefinition = File.ReadAllText(component + ".json");
                 CompositeComponentFactory componentFactory = JsonConvert.DeserializeObject<CompositeComponentFactory>(componentDefinition);
                 componentRepository.Add(component, componentFactory);
             }
 
-            foreach (string input in inputs)
+            foreach (string input in project.Inputs)
             {
                 string inputDefinition = File.ReadAllText(input + ".json");
                 InputFactory inputFactory = JsonConvert.DeserializeObject<InputFactory>(inputDefinition);
                 componentRepository.Add(input, inputFactory);
             }
 
-            foreach (string probe in probes)
+            foreach (string probe in project.Probes)
             {
                 componentRepository.Add(probe, new ProbeFactory { Name = probe });
             }
