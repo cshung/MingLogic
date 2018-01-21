@@ -30,7 +30,7 @@ Mapped : 000110000110
 Output : 000111000111
 ```
 
-Think more about it, it is obvious that no mapping could possibly work. The key problem is that the falling edge of the output is a falling edge of the input, and if we only count of rising edge, there is no way we can induce in the output. That leads to idea of doing both the rising edge counter and the falling edge counter.
+Think more about it, it is obvious that no mapping could possibly work. The key problem is that the falling edge of the output is a falling edge of the input, and if we only count of rising edge, there is no way we can induce a change in the output. That leads to idea of doing both the rising edge counter and the falling edge counter.
 
 ```
 Input  : 010101010101
@@ -67,4 +67,4 @@ That concludes the design for the counter in the `counter.json`.  We have an ext
 
 Given the counter - we can implement the frequency divider. We instantiate the counter twice, one with the clock signal and another with the inverted clock signal to produce the two counters. Two and gates are used to detect whether we have a `11` in the counters, and we use an or gate to produce the final output. 
 
-That concludes the frequency divider design.
+That concludes the frequency divider design in `divider.json`.
