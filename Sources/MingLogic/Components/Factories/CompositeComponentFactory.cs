@@ -19,11 +19,11 @@
                 Signals = new HashSet<string>(this.Signals),
                 MappedComponents = new List<MappedComponent>()
             };
-            foreach (var mappedComponentfactory in this.MappedComponentFactories)
+            foreach (var mappedComponentFactory in this.MappedComponentFactories)
             {
                 MappedComponent mappedComponent = new MappedComponent();
-                mappedComponent.PortMapping = new Dictionary<string, string>(mappedComponentfactory.PortMapping);
-                IComponentFactory mappedComponentFactory = componentRepository[mappedComponentfactory.ComponentFactoryName];
+                mappedComponent.PortMapping = new Dictionary<string, string>(mappedComponentFactory.PortMapping);
+                IComponentFactory mappedComponentFactory = componentRepository[mappedComponentFactory.ComponentFactoryName];
                 mappedComponent.Component = mappedComponentFactory.Build(componentRepository);
                 result.MappedComponents.Add(mappedComponent);
             }
@@ -33,16 +33,16 @@
 
         public bool Check(Dictionary<string, IComponentFactory> componentRepository)
         {
-            foreach (var mappedComponentfactory in this.MappedComponentFactories)
+            foreach (var mappedComponentFactory in this.MappedComponentFactories)
             {
                 IComponentFactory componentFactory;
-                if (!componentRepository.TryGetValue(mappedComponentfactory.ComponentFactoryName, out componentFactory))
+                if (!componentRepository.TryGetValue(mappedComponentFactory.ComponentFactoryName, out componentFactory))
                 {
                     return false;
                 }
 
                 ISet<string> requiredPorts = componentFactory.Ports;
-                if (!requiredPorts.SetEquals(mappedComponentfactory.PortMapping.Keys))
+                if (!requiredPorts.SetEquals(mappedComponentFactory.PortMapping.Keys))
                 {
                     return false;
                 }
@@ -54,7 +54,7 @@
                     return false;
                 }
 
-                foreach (var mappingTarget in mappedComponentfactory.PortMapping.Values)
+                foreach (var mappingTarget in mappedComponentFactory.PortMapping.Values)
                 {
                     if (!portSignals.Contains(mappingTarget))
                     {
