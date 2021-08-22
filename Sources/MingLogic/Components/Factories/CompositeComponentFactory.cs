@@ -23,8 +23,8 @@
             {
                 MappedComponent mappedComponent = new MappedComponent();
                 mappedComponent.PortMapping = new Dictionary<string, string>(mappedComponentFactory.PortMapping);
-                IComponentFactory mappedComponentFactory = componentRepository[mappedComponentFactory.ComponentFactoryName];
-                mappedComponent.Component = mappedComponentFactory.Build(componentRepository);
+                IComponentFactory componentFactory = componentRepository[mappedComponentFactory.ComponentFactoryName];
+                mappedComponent.Component = componentFactory.Build(componentRepository);
                 result.MappedComponents.Add(mappedComponent);
             }
 
