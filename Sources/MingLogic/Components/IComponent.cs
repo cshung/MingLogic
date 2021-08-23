@@ -1,12 +1,11 @@
 ﻿namespace MingLogic
 {
-    using System;
     using System.Collections.Generic;
 
     public interface IComponent
     {
-        ISet<string> Ports { get; }
+        ISet<Net> Ports { get; }
 
-        void Build(Dictionary<string, int> portMapping, Circuit circuit);
+        void Build(Dictionary<Net, int> portMapping, Circuit circuit);
     }
 }

@@ -1,14 +1,1 @@
-﻿{
-  "Ports": [ "in", "out" ],
-  "Signals": [],
-  "MappedComponentFactories": [
-    {
-      "ComponentFactoryName": "nand",
-      "PortMapping": {
-        "a": "in",
-        "b": "in",
-        "out": "out"
-      }
-    }
-  ]
-}
+{"Ports":["in","out"],"Signals":[],"MappedComponentFactories":[{"ComponentFactoryName":"nand","PortMapping":[{"Port":"a","Signal":"in"},{"Port":"b","Signal":"in"},{"Port":"out","Signal":"out"}]}]}

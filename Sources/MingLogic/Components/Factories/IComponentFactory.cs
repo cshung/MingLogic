@@ -4,7 +4,7 @@
 
     public interface IComponentFactory
     {
-        ISet<string> Ports { get; }
+        ISet<Bus> Ports { get; }
 
         bool Check(Dictionary<string, IComponentFactory> componentRepository);
 

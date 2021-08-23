@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bus.cs" />
+    <Compile Include="Components\PortMapping.cs" />
     <Compile Include="Drivers\Circuit.cs" />
     <Compile Include="Components\Factories\CompositeComponentFactory.cs" />
     <Compile Include="Components\Factories\InputFactory.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="Components\Probe.cs" />
     <Compile Include="Drivers\Project.cs" />
     <Compile Include="EventQueue\EventQueue.cs" />
+    <Compile Include="Net.cs" />
     <Compile Include="ScheduledEvents\NandScheduledEvent.cs" />
     <Compile Include="ScheduledEvents\ScheduledEvent.cs" />
     <Compile Include="ScheduledEvents\InputScheduledEvent.cs" />

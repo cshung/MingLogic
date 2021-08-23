@@ -5,11 +5,21 @@
 
     public class InputFactory : IComponentFactory
     {
-        public ISet<string> Ports
+        private Bus outBus;
+        private HashSet<Bus> ports;
+
+        public InputFactory()
+        {
+            this.outBus = new Bus { Name = "out", Width = 1 };
+            this.ports = new HashSet<Bus>();
+            this.ports.Add(this.outBus);
+        }
+
+        public ISet<Bus> Ports
         {
             get
             {
-                return new HashSet<string> { "out" };
+                return this.ports;
             }
         }
 

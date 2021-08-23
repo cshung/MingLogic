@@ -4,11 +4,27 @@
 
     public class NandFactory : IComponentFactory
     {
-        public ISet<string> Ports
+        private Bus a;
+        private Bus b;
+        private Bus outBus;
+        private HashSet<Bus> ports;
+
+        public NandFactory()
+        {
+            this.a = new Bus { Name = "a", Width = 1 };
+            this.b = new Bus { Name = "b", Width = 1 };
+            this.outBus = new Bus { Name = "out", Width = 1 };
+            this.ports = new HashSet<Bus>();
+            this.ports.Add(this.a);
+            this.ports.Add(this.b);
+            this.ports.Add(this.outBus);
+        }
+
+        public ISet<Bus> Ports
         {
             get
             {
-                return new HashSet<string> { "a", "b", "out" };
+                return this.ports;
             }
         }
 

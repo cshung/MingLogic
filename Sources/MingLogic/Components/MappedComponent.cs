@@ -6,6 +6,6 @@
     {
         public IComponent Component { get; set; }
 
-        public Dictionary<string, string> PortMapping { get; set; }
+        public Dictionary<Net, Net> PortMapping { get; set; }
     }
 }

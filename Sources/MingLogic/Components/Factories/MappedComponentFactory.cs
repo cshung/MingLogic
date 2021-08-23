@@ -6,6 +6,8 @@
     {
         public string ComponentFactoryName { get; set; }
 
-        public Dictionary<string, string> PortMapping { get; set; }
+        public List<PortMapping> PortMapping { get; set; }
+
+        public int Count { get; set; }
     }
 }

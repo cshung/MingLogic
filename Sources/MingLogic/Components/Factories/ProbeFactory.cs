@@ -4,17 +4,27 @@
 
     public class ProbeFactory : IComponentFactory
     {
+        private Bus inBus;
+        private HashSet<Bus> ports;
+
+        public ProbeFactory()
+        {
+            this.inBus = new Bus { Name = "in", Width = 1 };
+            this.ports = new HashSet<Bus>();
+            this.ports.Add(this.inBus);
+        }
+
         public string Name
         {
             get;
             set;
         }
 
-        public ISet<string> Ports
+        public ISet<Bus> Ports
         {
             get
             {
-                return new HashSet<string> { "in" };
+                return this.ports;
             }
         }
 

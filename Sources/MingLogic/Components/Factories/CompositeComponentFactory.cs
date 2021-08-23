@@ -5,9 +5,9 @@
 
     public class CompositeComponentFactory : IComponentFactory
     {
-        public ISet<string> Ports { get; set; }
+        public ISet<Bus> Ports { get; set; }
 
-        public ISet<string> Signals { get; set; }
+        public ISet<Bus> Signals { get; set; }
 
         public List<MappedComponentFactory> MappedComponentFactories { get; set; }
 
@@ -15,17 +15,41 @@
         {
             CompositeComponent result = new CompositeComponent
             {
-                Ports = new HashSet<string>(this.Ports),
-                Signals = new HashSet<string>(this.Signals),
+                Ports = new HashSet<Net>(),
+                Signals = new HashSet<Net>(),
                 MappedComponents = new List<MappedComponent>()
             };
+            foreach (Bus port in this.Ports)
+            {
+                for (int i = 0; i < port.Width; i++)
+                {
+                    result.Ports.Add(new Net { Name = port.Name, Index = i });
+                }
+            }
+
+            foreach (Bus signal in this.Signals)
+            {
+                for (int i = 0; i < signal.Width; i++)
+                {
+                    result.Signals.Add(new Net { Name = signal.Name, Index = i });
+                }
+            }
+
             foreach (var mappedComponentFactory in this.MappedComponentFactories)
             {
-                MappedComponent mappedComponent = new MappedComponent();
-                mappedComponent.PortMapping = new Dictionary<string, string>(mappedComponentFactory.PortMapping);
-                IComponentFactory componentFactory = componentRepository[mappedComponentFactory.ComponentFactoryName];
-                mappedComponent.Component = componentFactory.Build(componentRepository);
-                result.MappedComponents.Add(mappedComponent);
+                for (int i = 0; i < mappedComponentFactory.Count; i++)
+                {
+                    MappedComponent mappedComponent = new MappedComponent();
+                    mappedComponent.PortMapping = new Dictionary<Net, Net>();
+                    foreach (var mapping in mappedComponentFactory.PortMapping)
+                    {
+                        // TODO: Implement an expression interpreter to perform the port mapping
+                    }
+
+                    IComponentFactory componentFactory = componentRepository[mappedComponentFactory.ComponentFactoryName];
+                    mappedComponent.Component = componentFactory.Build(componentRepository);
+                    result.MappedComponents.Add(mappedComponent);
+                }
             }
 
             return result;
@@ -41,25 +65,11 @@
                     return false;
                 }
 
-                ISet<string> requiredPorts = componentFactory.Ports;
-                if (!requiredPorts.SetEquals(mappedComponentFactory.PortMapping.Keys))
-                {
-                    return false;
-                }
-
-                HashSet<string> portSignals = new HashSet<string>(this.Ports);
+                HashSet<Bus> portSignals = new HashSet<Bus>(this.Ports);
                 portSignals.UnionWith(this.Signals);
                 if (portSignals.Count != this.Ports.Count + this.Signals.Count)
                 {
                     return false;
-                }
-
-                foreach (var mappingTarget in mappedComponentFactory.PortMapping.Values)
-                {
-                    if (!portSignals.Contains(mappingTarget))
-                    {
-                        return false;
-                    }
                 }
 
                 if (!componentFactory.Check(componentRepository))

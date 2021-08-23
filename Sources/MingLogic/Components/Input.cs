@@ -6,22 +6,24 @@
     public class Input : IComponent
     {
         private List<Tuple<int, bool>> inputs;
+        private Net outNet;
+        private HashSet<Net> ports;
 
         public Input(List<Tuple<int, bool>> inputs)
         {
             this.inputs = inputs;
-            this.Ports = new HashSet<string> { "out" };
+            this.outNet = new Net { Name = "out", Index = 0 };
+            this.ports = new HashSet<Net>();
         }
 
-        public ISet<string> Ports
+        public ISet<Net> Ports
         {
-            get;
-            private set;
+            get { return this.ports; }
         }
 
-        public void Build(Dictionary<string, int> portMapping, Circuit circuit)
+        public void Build(Dictionary<Net, int> portMapping, Circuit circuit)
         {
-            circuit.RegisterInput(portMapping["out"], this.inputs);
+            circuit.RegisterInput(portMapping[this.outNet], this.inputs);
         }
     }
 }

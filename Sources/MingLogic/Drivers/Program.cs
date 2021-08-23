@@ -44,7 +44,7 @@
 
             IComponent testBench = testBenchFactory.Build(componentRepository);
             Circuit circuit = new Circuit();
-            testBench.Build(new Dictionary<string, int>(), circuit);
+            testBench.Build(new Dictionary<Net, int>(), circuit);
             circuit.Run();
         }
     }

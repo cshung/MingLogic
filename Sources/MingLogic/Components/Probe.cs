@@ -1,27 +1,29 @@
 ﻿namespace MingLogic
 {
-    using System;
     using System.Collections.Generic;
 
     public class Probe : IComponent
     {
         private string name;
+        private Net inNet;
+        private HashSet<Net> ports;
 
         public Probe(string name)
         {
             this.name = name;
-            this.Ports = new HashSet<string> { "in" };
+            this.inNet = new Net { Name = "in", Index = 0 };
+            this.ports = new HashSet<Net>();
+            this.ports.Add(this.inNet);
         }
 
-        public ISet<string> Ports
+        public ISet<Net> Ports
         {
-            get;
-            private set;
+            get { return this.ports; }
         }
 
-        public void Build(Dictionary<string, int> portMapping, Circuit circuit)
+        public void Build(Dictionary<Net, int> portMapping, Circuit circuit)
         {
-            circuit.RegisterProbe(portMapping["in"], this.name);
+            circuit.RegisterProbe(portMapping[this.inNet], this.name);
         }
     }
 }

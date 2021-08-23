@@ -4,13 +4,13 @@
 
     public class CompositeComponent : IComponent
     {
-        public ISet<string> Ports { get; set; }
+        public ISet<Net> Ports { get; set; }
 
-        public ISet<string> Signals { get; set; }
+        public ISet<Net> Signals { get; set; }
 
         public List<MappedComponent> MappedComponents { get; set; }
 
-        public void Build(Dictionary<string, int> portMapping, Circuit circuit)
+        public void Build(Dictionary<Net, int> portMapping, Circuit circuit)
         {
             foreach (var signal in this.Signals)
             {
@@ -19,7 +19,7 @@
 
             foreach (var mappedComponent in this.MappedComponents)
             {
-                Dictionary<string, int> componentPortMapping = new Dictionary<string, int>();
+                Dictionary<Net, int> componentPortMapping = new Dictionary<Net, int>();
                 foreach (var kvp in mappedComponent.PortMapping)
                 {
                     componentPortMapping.Add(kvp.Key, portMapping[kvp.Value]);
